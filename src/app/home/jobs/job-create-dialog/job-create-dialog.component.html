@@ -1,0 +1,42 @@
+<h3 mat-dialog-title>Crear Puesto de Trabajo</h3>
+<mat-dialog-content>
+  <form (ngSubmit)="create()">
+    <mat-form-field>
+      <label>
+        <input [(ngModel)]="job.name" cdkFocusInitial class="form-control" matInput name="name"
+               placeholder="Nombre" required type="text"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Riesgo</mat-label>
+      <mat-select [(ngModel)]="job.risk" name="risk">
+      <mat-option *ngFor="let risk of risks" [value]="risk.value">
+        {{risk.title}}
+      </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input [(ngModel)]="job.minSalary" cdkFocusInitial class="form-control" matInput name="minSalary"
+               placeholder="Salario minimo" required type="number"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <label>
+        <input [(ngModel)]="job.maxSalary" cdkFocusInitial class="form-control" matInput name="maxSalary"
+               placeholder="Salario Maximo" required type="number"/>
+      </label>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>Close</button>
+
+  <button (click)="create()" color="primary" mat-raised-button type="submit">
+<!--    <mat-icon>local_tag</mat-icon>-->
+    <span>Crear Puesto</span>
+  </button>
+</mat-dialog-actions>
+

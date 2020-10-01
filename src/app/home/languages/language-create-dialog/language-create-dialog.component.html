@@ -1,0 +1,19 @@
+<h3 mat-dialog-title>Create Tag</h3>
+<mat-dialog-content>
+  <form (ngSubmit)="create()">
+    <mat-form-field>
+      <label>
+        <input [(ngModel)]="language.name" cdkFocusInitial class="form-control" matInput name="name"
+               placeholder="Nombre" required type="text"/>
+      </label>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>Close</button>
+
+  <button (click)="create()" color="primary" mat-raised-button type="submit">
+    <mat-icon>local_tag</mat-icon>
+    <span>Crear Lenguaje</span>
+  </button>
+</mat-dialog-actions>
