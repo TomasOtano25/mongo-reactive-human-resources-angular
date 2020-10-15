@@ -1,10 +1,19 @@
-<mat-card>
-  <h2>Show All Jobs</h2>
-  <button (click)="show()" color="primary" mat-raised-button>
-    <mat-icon>view_comfy</mat-icon>
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-card>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
 
-<app-crud (create)="create()"  (delete)="delete($event)" [updateAction]="false" [readAction]="false" [columns]="columns"
-          [data]="dataSource" [title]="title"></app-crud>
+      <div class="container">
+        <h2>Puestos</h2>
+        <button (click)="show()" color="primary" mat-raised-button>
+          <mat-icon>view_comfy</mat-icon>
+          <mat-icon>search</mat-icon>
+        </button>
+
+
+        <app-crud (create)="create()"  (delete)="delete($event)" (update)="update($event)" [readAction]="false" [columns]="columns"
+                  [data]="dataSource" [title]="title"></app-crud>
+
+      </div>
+    </div>
+  </div>
+</div>

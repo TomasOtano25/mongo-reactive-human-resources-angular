@@ -1,5 +1,11 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+
+
+
 <mat-card>
-    <h2>Mostrar todas las competencias</h2>
+    <h2>Competencias</h2>
   <button (click)="show()" color="primary" mat-raised-button>
     <mat-icon>view_comfy</mat-icon>
     <mat-icon>search</mat-icon>
@@ -8,3 +14,6 @@
 
 <app-crud (create)="create()" (delete)="delete($event)" (update)="update($event)" [readAction]="false" [columns]="columns"
           [data]="dataSource" [title]="title"></app-crud>
+    </div>
+  </div>
+</div>

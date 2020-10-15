@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {take} from 'rxjs/operators';
-import {CancelYesDialogComponent} from '../../core/cancel-yes-dialog.component';
 import {Competency} from '../shared/competency.model';
-import {MatDialog} from '@angular/material/dialog';
 import {CompetencyService} from '../shared/competency.service';
 import {CompetencyCreateDialogComponent} from './competency-create-dialog/competency-create-dialog.component';
 import {CompetencyEditDialogComponent} from './competency-edit-dialog/competency-edit-dialog.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { CancelYesDialogService } from 'src/app/core/cancel-yes-dialog.service';
 
 @Component({
   selector: 'app-competencies',
@@ -19,7 +18,8 @@ export class CompetenciesComponent implements OnInit {
   public columns: Array<string>;
   public dataSource: Competency[];
 
-  constructor(private dialog: MatDialog, private competencyService: CompetencyService) { }
+  constructor(private dialog: NgbModal, private competencyService: CompetencyService,
+    private cancelYesDialogService: CancelYesDialogService) { }
 
   ngOnInit(): void {
     this.title = 'Gestion de competencias';
@@ -34,29 +34,30 @@ export class CompetenciesComponent implements OnInit {
 
   public create(): void {
     this.dialog.open(CompetencyCreateDialogComponent)
-      .afterClosed().pipe(take(1)).subscribe(
-      () => {
+      .result.then((result) => {
         this.show();
-      }
-    );
+      });
   }
 
   public update(competency: Competency): void {
-    this.dialog.open(CompetencyEditDialogComponent,
-      {data: {obj: competency}}).afterClosed().subscribe(
-      () => {
-        this.show();
-      }
-    );
+    const modalRef = this.dialog.open(CompetencyEditDialogComponent);
+    modalRef.componentInstance.data = competency;
+    modalRef.result.then(() => {
+      this.show();
+    });
+    // this.dialog.open(CompetencyEditDialogComponent,
+    //   {data: {obj: competency}}).afterClosed().subscribe(
+    //   () => {
+    //     this.show();
+    //   }
+    // );
   }
 
   public delete(competency: Competency): void {
-    this.dialog.open(CancelYesDialogComponent).afterClosed().pipe(take(1)).subscribe((shouldDelete: boolean) => {
-      if (shouldDelete) {
-        this.competencyService.delete(competency).subscribe(() => this.show());
-      }
-    }, error => console.log(error), () => {
-      // this.dataSource = this.dataSource.filter(o => o.id !== language.id);
+    this.cancelYesDialogService.confirmThis('Estas seguro que deseas eliminar?', () =>  {
+      this.competencyService.delete(competency).subscribe(() => this.show());
+    }, () => {
+
     });
   }
 

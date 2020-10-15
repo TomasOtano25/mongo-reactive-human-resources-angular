@@ -1,0 +1,127 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Solicutud de empleo</h4>
+      </div>
+
+
+<mat-horizontal-stepper>
+
+  <form [formGroup]="candidateForm">
+
+  <mat-step label="Datos Personales" state="phone">
+
+
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="form-group">
+        <label>Cedula</label>
+        <input type="text" class="form-control" formControlName="dni" placeholder="xxx-xxxxxx-x" />
+        <span class="text-danger"
+            *ngIf="(candidateFormControl.dni.touched || submitted) && candidateFormControl.dni.errors?.required">
+            Cedula es requerida
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Salario</label>
+        <input type="number"  class="form-control" formControlName="salary" placeholder="Salario" />
+      </div>
+
+      <div class="form-group">
+        <label for="job">Puesto</label>
+        <select formControlName="job" class="form-control" (change)="changeJob($event)">
+            <option disabled>Seleccione Puesto</option>
+            <option *ngFor="let job of jobs" [ngValue]="job" >{{job.name}}</option>
+        </select>
+      </div>
+      <!-- <div class="form-group">
+        <label for="languages">Idiomas:</label>
+        <select formControlName="languages" class="form-control">
+            <option disabled>Seleccione Idiomas</option>
+            <option *ngFor="let language of languages" [ngValue]="language">{{language.name}}</option>
+        </select>
+      </div> -->
+      <div class="form-group">
+        <label>Idiomas</label>
+        <ng-select [items]="languages"
+                    multiple="true"
+                    bindLabel="name"
+                    appendTo="body"
+                    formControlName="languages"
+        ></ng-select>
+      </div>
+
+      <div class="form-group">
+        <label>Competencias</label>
+        <ng-select [items]="competencies"
+                    multiple="true"
+                    bindLabel="description"
+                    appendTo="body"
+                    formControlName="competencies"
+        ></ng-select>
+      </div>
+
+
+    <div>
+      <button mat-button matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+  <mat-step label="Capacitaciones" state="chat">
+
+
+    <button class="btn btn-primary" (click)="addTraining()">Agregar Capacitacion</button>
+    <ul>
+      <li *ngFor="let training of trainings?.controls; let i = index">
+        <app-training [index]="i" [trainingForm]="training" (deleteTraining)="deleteTraining($event)"></app-training>
+      </li>
+    </ul>
+
+
+    <div>
+      <button mat-button matStepperPrevious>Volver</button>
+      <button mat-button matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Experiencia laboral">
+
+    <button class="btn btn-primary" (click)="addWorkExperience()">Agregar Experiencia Laboral</button>
+    <ul>
+      <li *ngFor="let workExperience of workExperiences?.controls; let i = index">
+        <app-work-experience [index]="i" [workExperienceForm]="workExperience" (deleteWorkExperience)="deleteWorkExperience($event)"></app-work-experience>
+      </li>
+    </ul>
+
+    <div>
+      <button mat-button matStepperPrevious>Volver</button>
+      <button mat-button matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Contactos">
+
+    <button class="btn btn-primary" (click)="addContact()">Agregar Contacto</button>
+    <ul>
+      <li *ngFor="let contact of contacts?.controls; let i = index">
+        <app-contact [index]="i" [contactForm]="contact" (deleteContact)="deleteContact($event)"></app-contact>
+      </li>
+    </ul>
+
+    <!-- <app-contact></app-contact> -->
+
+    <div>
+      <button  type="submit" class="btn btn-primary" (click)="saveCandidate()">Enviar</button>
+    </div>
+  </mat-step>
+
+
+
+  </form>
+
+</mat-horizontal-stepper>
+      </div>
+  </div>
+</div>

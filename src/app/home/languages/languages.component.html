@@ -1,10 +1,31 @@
-<mat-card>
-  <h2>Show All Tags</h2>
-  <button (click)="show()" color="primary" mat-raised-button>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+
+
+<div class="container-fluid">
+  <h2>
+    <i class="fa fa-language" aria-hidden="true"></i>
+    <span style="margin-left: 20px;">Idiomas</span>
+  </h2>
+  <!-- <button (click)="show()" color="primary" mat-raised-button>
     <mat-icon>view_comfy</mat-icon>
     <mat-icon>search</mat-icon>
-  </button>
-</mat-card>
+  </button> -->
+
+  <form [formGroup]="formGroup">
+    <input
+      type="text"
+      class="form-control"
+      name="searchString"
+      placeholder="Type to search..."
+      formControlName="filter"
+    />
+  </form>
+</div>
 
 <app-crud (create)="create()" (delete)="delete($event)" (update)="update($event)" [readAction]="false" [columns]="columns"
-          [data]="dataSource" [title]="title"></app-crud>
+          [data]="filteredLanguages$ | async" [title]="title"></app-crud>
+    </div>
+  </div>
+</div>

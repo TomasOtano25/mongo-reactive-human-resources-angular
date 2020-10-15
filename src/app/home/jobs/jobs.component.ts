@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Job} from '../shared/job.model';
-import {MatDialog} from '@angular/material/dialog';
 import {JobService} from '../shared/job.service';
 import {take} from 'rxjs/operators';
 import {JobCreateDialogComponent} from './job-create-dialog/job-create-dialog.component';
-import {CancelYesDialogComponent} from '../../core/cancel-yes-dialog.component';
+import { CancelYesDialogService } from '../../core/cancel-yes-dialog.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -18,13 +19,14 @@ export class JobsComponent implements OnInit {
   public columns: Array<string>;
   public dataSource: Job[];
 
-  constructor(private dialog: MatDialog, private jobService: JobService) {
+  constructor(private dialog: NgbModal, private cancelYesDialogService: CancelYesDialogService,
+    private jobService: JobService) {
     this.job = {name: null, risk: null, minSalary: null, maxSalary: null};
     this.dataSource = null;
   }
 
   ngOnInit(): void {
-    this.title = 'Getion de puestos';
+    this.title = 'Gestion de puestos';
     this.columns = ['name', 'risk', 'minSalary', 'maxSalary'];
     this.show();
   }
@@ -36,20 +38,24 @@ export class JobsComponent implements OnInit {
 
   public create(): void {
     this.dialog.open(JobCreateDialogComponent)
-      .afterClosed().pipe(take(1)).subscribe(
-      () => {
+      .result.then((result) => {
         this.show();
-      }
-    );
+      });
+  }
+
+  public update(job: Job): void {
+    const modalRef = this.dialog.open(JobEditDialogComponent);
+    modalRef.componentInstance.data = job;
+    modalRef.result.then(() => {
+      this.show();
+    });
   }
 
   public delete(job: Job): void {
-    this.dialog.open(CancelYesDialogComponent).afterClosed().pipe(take(1)).subscribe((shouldDelete: boolean) => {
-      if (shouldDelete) {
-        this.jobService.delete(job).subscribe(() => this.show());
-      }
-    }, error => console.log(error), () => {
-      // this.dataSource = this.dataSource.filter(o => o.id !== language.id);
+    this.cancelYesDialogService.confirmThis('Are you sure to delete?', () =>  {
+      this.jobService.delete(job).subscribe(() => this.show());
+    }, () => {
+
     });
   }
 

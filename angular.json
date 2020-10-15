@@ -23,10 +23,23 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
+            "allowedCommonJsDependencies": [
+              "xlsx",
+              "file-saver"
             ],
-            "scripts": []
+            "styles": [
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/scss/light-bootstrap-dashboard.scss",
+              "src/assets/css/demo.css",
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -121,5 +134,17 @@
       }
     }
   },
-  "defaultProject": "mongo-reactive-human-resources-angular"
+  "defaultProject": "mongo-reactive-human-resources-angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }

@@ -12,17 +12,36 @@ import {AppServices} from './app-services';
 import {CdkTableModule} from '@angular/cdk/table';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import { SidebarModule } from './sidebar/sidebar.module';
+import { NavbarModule } from './navbar/navbar.module';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CommonModule} from '@angular/common';
+
+import { NgSelectModule } from '@ng-select/ng-select';
+import { DlDateTimeDateModule, DlDateTimeInputModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   imports: [
     AppMaterialModule,
+    CommonModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     CdkTableModule,
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    NgbModule,
+    SidebarModule,
+    NavbarModule,
+    NgSelectModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
+    DlDateTimeInputModule
   ],
   declarations: [
     AppComponent,

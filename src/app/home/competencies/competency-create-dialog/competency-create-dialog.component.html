@@ -1,19 +1,24 @@
-<h3 mat-dialog-title>Crear Competencia</h3>
-<mat-dialog-content>
-  <form (ngSubmit)="create()">
-    <mat-form-field>
-      <label>
-        <input [(ngModel)]="competency.description" cdkFocusInitial class="form-control" matInput name="description"
-               placeholder="Descripcion" required type="text"/>
-      </label>
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-dialog-close mat-raised-button>Close</button>
+<div class="modal-header">
+  <h4 class="modal-title">Nueva competencia</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
-  <button (click)="create()" color="primary" mat-raised-button type="submit">
+<div class="modal-body">
+  <form (ngSubmit)="create()">
+    <div class="form-group">
+      <label>Descripcion</label>
+        <input [(ngModel)]="competency.description" cdkFocusInitial class="form-control" name="description"
+               placeholder="Descripcion" required type="text"/>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="dialog.close('Close click')">Close</button>
+
+  <button (click)="create()" class="btn btn-primary" type="submit">
 <!--    <mat-icon>local_tag</mat-icon>-->
     <span>Crear Competencia</span>
   </button>
-</mat-dialog-actions>
+</div>

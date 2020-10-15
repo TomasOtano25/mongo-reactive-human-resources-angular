@@ -1,10 +1,46 @@
-<mat-toolbar color="primary">
-  <img alt="miw" src="../assets/img/miw.png"/>
-  <span>SGH</span>
-  <button (click)="login()" mat-button>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">SGH</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+
+          <a class="nav-link" (click)="register()">Sign Up</a>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="login()">Log In</a >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container">
+      <h1 class="masthead-heading mb-0">Bienvenido a SGH</h1>
+      <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
+      <button (click)="login()" class="btn btn-primary btn-xl rounded-pill mt-5">Log In</button>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+
+<!-- <div>
+  <button (click)="login()" class="btn btn-primary">
     <mat-icon>person_outline</mat-icon>
     <span>Login</span>
   </button>
-</mat-toolbar>
-
-<h2>Bienvenido a SGH</h2>
+  <button (click)="login()" class="btn btn-primary">
+    <mat-icon>person_outline</mat-icon>
+    <span>Login</span>
+  </button>
+</div> -->

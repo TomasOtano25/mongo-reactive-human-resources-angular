@@ -1,0 +1,21 @@
+<form [formGroup]="contactForm">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <input class="form-control" formControlName="name" placeholder="Nombre">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input class="form-control" formControlName="phone" placeholder="Telefono">
+        </div>
+      </td>
+      <td>
+        <div>
+          <button class="btn btn-danger" (click)="delete()"><span class="oi oi-x"></span></button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

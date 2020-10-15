@@ -43,7 +43,7 @@ export class HttpService {
         this.token.name = new JwtHelperService().decodeToken(token.token).name;
         this.token.roles = new JwtHelperService().decodeToken(token.token).roles;
         localStorage.setItem('token', JSON.stringify(this.token));
-        this.tokenSubject.next(this.token);
+        this.tokenSubject.next(token);
         this.loginTime = new Date();
       }), catchError(error => {
         return this.handleError(error);
@@ -66,6 +66,11 @@ export class HttpService {
 
   public get getToken(): Token {
     return this.tokenSubject.value;
+  }
+
+  param(key: string, value: string): HttpService {
+    this.params = this.params.append(key, value);
+    return this;
   }
 
   post(endPoint: string, body?: object): Observable<any> {
@@ -105,7 +110,7 @@ export class HttpService {
   }
 
   private authBasic(mobile: number, password: string): HttpService {
-    return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password));
+    return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password))
   }
 
   private header(key: string, value: string): HttpService {
@@ -122,6 +127,9 @@ export class HttpService {
   private createOptions(): any {
     if (this.token !== undefined) {
       this.header('Authorization', 'Bearer ' + this.token.token);
+    } else if(localStorage.getItem('token')) {
+      let user: Token = JSON.parse(localStorage.getItem('token'));
+      this.header('Authorization', 'Bearer' + user.token);
     }
     const options: any = {
       headers: this.headers,

@@ -1,19 +1,26 @@
-<mat-dialog-content>
+<div class="modal-header">
+  <h4 class="modal-title">Nueva competencia</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
   <form (ngSubmit)="update()">
-    <mat-form-field>
-      <label>
-        <input [(ngModel)]=competency2.description cdkFocusInitial class="form-control" matInput name="description"
+    <div class="form-group">
+      <label>Descripcion</label>
+        <input [(ngModel)]=competency2.description cdkFocusInitial class="form-control" name="description"
                placeholder="Descripcion" required type="text"/>
-      </label>
-    </mat-form-field>
+    </div>
   </form>
-</mat-dialog-content>
-<mat-dialog-actions>
+</div>
 
-  <button mat-dialog-close mat-raised-button>Close</button>
+<div class="modal-footer">
 
-  <button (click)="update()" color="primary" mat-raised-button type="submit">
-<!--    <mat-icon>local_tag</mat-icon>-->
+  <button type="button" class="btn btn-outline-dark" (click)="dialog.close('Close click')">Close</button>
+
+  <button (click)="update()" class="btn btn-primary" type="submit">
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
     <span>Actualizar Competencia</span>
   </button>
-</mat-dialog-actions>
+</div>

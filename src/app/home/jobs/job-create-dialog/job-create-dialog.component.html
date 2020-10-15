@@ -1,42 +1,49 @@
-<h3 mat-dialog-title>Crear Puesto de Trabajo</h3>
-<mat-dialog-content>
-  <form (ngSubmit)="create()">
-    <mat-form-field>
-      <label>
-        <input [(ngModel)]="job.name" cdkFocusInitial class="form-control" matInput name="name"
-               placeholder="Nombre" required type="text"/>
-      </label>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Riesgo</mat-label>
-      <mat-select [(ngModel)]="job.risk" name="risk">
-      <mat-option *ngFor="let risk of risks" [value]="risk.value">
-        {{risk.title}}
-      </mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="modal-header">
+  <h4 class="modal-title">Nuevo Puesto de Trabajo</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
 
-    <mat-form-field>
-      <label>
-        <input [(ngModel)]="job.minSalary" cdkFocusInitial class="form-control" matInput name="minSalary"
+  <form (ngSubmit)="create()">
+    <div class="form-group">
+      <label>Nombre</label>
+        <input [(ngModel)]="job.name" cdkFocusInitial class="form-control" name="name"
+               placeholder="Nombre" required type="text"/>
+    </div>
+
+      <div class="form-group">
+          <label for="risk">Riesgo</label>
+          <select [(ngModel)]="job.risk" name="risk" class="form-control">
+            <option disabled>Seleccione Riesgo</option>
+            <option *ngFor="let risk of risks" [value]="risk.value">
+              {{risk.title}}
+            </option>
+          </select>
+      </div>
+
+
+    <div class="form-group">
+      <label>Salario Minimo</label>
+        <input [(ngModel)]="job.minSalary" cdkFocusInitial class="form-control" name="minSalary"
                placeholder="Salario minimo" required type="number"/>
-      </label>
-    </mat-form-field>
-    <mat-form-field>
-      <label>
-        <input [(ngModel)]="job.maxSalary" cdkFocusInitial class="form-control" matInput name="maxSalary"
+    </div>
+
+    <div class="form-group">
+      <label>Salario Maximo</label>
+        <input [(ngModel)]="job.maxSalary" cdkFocusInitial class="form-control" name="maxSalary"
                placeholder="Salario Maximo" required type="number"/>
-      </label>
-    </mat-form-field>
+    </div>
 
   </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-dialog-close mat-raised-button>Close</button>
+</div>
 
-  <button (click)="create()" color="primary" mat-raised-button type="submit">
-<!--    <mat-icon>local_tag</mat-icon>-->
-    <span>Crear Puesto</span>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="dialog.close('Close click')">Close</button>
+
+  <button (click)="create()" class="btn btn-primary" type="submit">
+    <span>Guardar</span>
   </button>
-</mat-dialog-actions>
+</div>
 

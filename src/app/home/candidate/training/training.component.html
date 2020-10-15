@@ -1,0 +1,44 @@
+<form [formGroup]="trainingForm">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <input class="form-control" formControlName="description" placeholder="Nombre">
+        </div>
+      </td>
+      <td>
+
+        <div>
+          <select formControlName="level" name="level" class="form-control">
+            <option disabled>Seleccione Riesgo</option>
+            <option *ngFor="let level of levels" [value]="level.value">
+              {{level.title}}
+            </option>
+          </select>
+          <!-- <input class="form-control" formControlName="level" placeholder="Level"> -->
+        </div>
+
+      </td>
+      <td>
+        <div>
+          <input type="date" class="form-control" formControlName="from" placeholder="Level">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input type="date" class="form-control" formControlName="to" placeholder="Level">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input class="form-control" formControlName="institution" placeholder="Institucion">
+        </div>
+      </td>
+      <td>
+        <div>
+          <button class="btn btn-danger" (click)="delete()"><span class="oi oi-x"></span></button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,60 @@
+<div class="main-content">
+<div class="container-fluid">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Contrataciones</h4>
+      <p class="category">Reporte de Contrataciones</p>
+      <div class="d-flex">
+        <button (click)="exportToExcel()" class="btn btn-success my-2">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          <span>Export to Excel</span>
+        </button>
+        <button (click)="exportToCsv()" class="btn btn-default my-2 mx-2">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          <span>Export to Csv</span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <div>
+
+        <form class="form-inline my-3">
+          <div class="form-group mb-2 mx-sm-3">
+            <label>Desde</label>
+            <input [(ngModel)]="employeeSearch.fromDate" type="date" class="form-control" name="fromDate"  />
+          </div>
+          <div class="form-group mb-2 mx-sm-3">
+            <label>Hasta</label>
+            <input [(ngModel)]="employeeSearch.toDate" type="date" class="form-control" name="toDate"  />
+          </div>
+          <button (click)="search()" class="btn btn-primary mb-2">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+
+      </div>
+
+      <table class="table table-hover table-striped" #employeeTable> <!-- we will make use of this angular var as element reference -->
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Nombre</th>
+            <th scope="col">Cedula</th>
+            <th scope="col">Salario</th>
+            <th scope="col">Puesto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <!-- <td scope="row">{{ candidate.id }}</td> -->
+            <td scope="row">{{ employee.name }}</td>
+            <td>{{ employee.dni }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>{{ employee.job.name }}</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

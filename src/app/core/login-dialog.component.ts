@@ -1,7 +1,7 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Component, Inject, Input} from '@angular/core';
 import {TokensService} from './tokens.service';
 import {Router} from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   templateUrl: './login-dialog.component.html',
@@ -15,15 +15,18 @@ export class LoginDialogComponent {
   nowTime: Date;
   newMobile: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private tokensService: TokensService,
+  @Input() data: any;
+
+  constructor(public activeModal: NgbActiveModal,  private tokensService: TokensService,
               private router: Router) {
-    this.homeUrl = data.homeUrl;
+
   }
 
   login(): void {
     this.tokensService.login(this.mobile, this.password).subscribe(
       () => {
-        this.router.navigate([this.homeUrl]);
+        this.activeModal.close('Close click');
+        this.router.navigate([this.data.homeUrl]);
       }
     );
   }

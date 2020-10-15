@@ -1,8 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {CompetencyService} from '../../shared/competency.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Competency} from '../../shared/competency.model';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-competency-edit-dialog',
@@ -14,26 +13,32 @@ export class CompetencyEditDialogComponent implements OnInit {
   public competency2: Competency = {id: null, description: null};
   public submitted: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog,
-              private competencyService: CompetencyService, private message: MatSnackBar) {
-    this.competencyService.readOne(data.obj.id).subscribe((competency: Competency) => {
-      this.competency = competency;
-    });
+  @Input() data :Competency;
+
+  constructor(public dialog: NgbActiveModal,
+              private competencyService: CompetencyService) {
+
+
+
   }
 
   ngOnInit(): void {
-    this.competency2.id = this.data.obj.id;
-    this.competency2.description = this.data.obj.description;
+    this.competencyService.readOne(this.data.id).subscribe((competency: Competency) => {
+      this.competency = competency;
+    });
+
+    this.competency2.id = this.data.id;
+    this.competency2.description = this.data.description;
     this.submitted = false;
   }
 
   public update(): void {
     this.competencyService.update(this.competency.id, this.competency2).subscribe(() => {
-      this.dialog.closeAll();
+      this.dialog.close();
     }, (error: any) => {
-      this.message.open('Ups, algo salió mal.', null, {duration: 2000});
+
     }, () => {
-      this.message.open('Competencia actualizada correctamente.', null, {duration: 3000});
+
     });
   }
 

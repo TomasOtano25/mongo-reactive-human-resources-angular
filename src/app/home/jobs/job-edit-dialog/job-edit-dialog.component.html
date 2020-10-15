@@ -1,1 +1,27 @@
-<p>job-edit-dialog works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">
+    <i class="fa fa-language" aria-hidden="true"></i>
+    <span>  Actualizar idioma</span>
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="update()">
+    <div class="form-group">
+      <label></label>
+        <input [(ngModel)]=job2.name cdkFocusInitial class="form-control" name="name"
+               placeholder="Nombre" required type="text"/>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="dialog.close('Close click')"><span class="oi oi-x"></span> Close</button>
+
+  <button (click)="update()" class="btn btn-primary" type="submit">
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    <span>Actualizar Lenguaje</span>
+  </button>
+</div>
+

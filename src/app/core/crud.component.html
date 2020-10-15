@@ -3,7 +3,7 @@
     {{title}}
   </mat-card-title>
   <mat-card-content>
-    <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <mat-table #table [dataSource]="dataSource" matSort>
       <!-- Dynamic column -->
       <ng-container *ngFor="let def of columns" [matColumnDef]="def">
         <mat-header-cell *matHeaderCellDef>{{ def | uppercase }}</mat-header-cell>

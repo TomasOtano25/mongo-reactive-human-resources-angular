@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Job, Risk} from '../../shared/job.model';
 import {JobService} from '../../shared/job.service';
 
@@ -16,7 +16,7 @@ export class JobCreateDialogComponent implements OnInit {
   public  submitted: boolean;
 
 
-  constructor(private dialog: MatDialog, private jobService: JobService,
+  constructor(public dialog: NgbActiveModal, private jobService: JobService,
               private message: MatSnackBar) {
     this.risks = this.enumSelector(Risk);
   }
@@ -31,9 +31,8 @@ export class JobCreateDialogComponent implements OnInit {
   }
 
   public create(): void {
-
     this.jobService.create(this.job).subscribe(() => {
-      this.dialog.closeAll();
+      this.dialog.close();
     }, (error: any) => {
       console.log(error);
       this.message.open('Ups, algo salió mal.', null, {duration: 2000});

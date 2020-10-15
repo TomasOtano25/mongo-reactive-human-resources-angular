@@ -1,0 +1,36 @@
+<form [formGroup]="workExperienceForm">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <input class="form-control" formControlName="company" placeholder="Nombre de la Compañia">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input class="form-control"  formControlName="job" placeholder="Puesto">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input type="date" class="form-control"  formControlName="from" placeholder="Desde">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input type="date" class="form-control"  formControlName="to" placeholder="Hasta">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input type="number" class="form-control"  formControlName="salary" placeholder="Salario">
+        </div>
+      </td>
+      <td>
+        <div>
+          <button class="btn btn-danger" (click)="delete()"><span class="oi oi-x"></span></button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

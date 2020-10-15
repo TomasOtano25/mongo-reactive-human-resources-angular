@@ -1,0 +1,38 @@
+<div class="main-content">
+<div class="container-fluid">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Empleados</h4>
+      <p class="category">Lista de empleados activos</p>
+    </div>
+    <div>
+      <table class="table table-hover table-striped" #candidateTable> <!-- we will make use of this angular var as element reference -->
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Nombre</th>
+            <th scope="col">Cedula</th>
+            <th scope="col">Salario</th>
+            <th scope="col">Puesto</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <!-- <td scope="row">{{ candidate.id }}</td> -->
+            <td scope="row">{{ employee.name }}</td>
+            <td>{{ employee.dni }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>{{ employee.job.name }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="delete(employee)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

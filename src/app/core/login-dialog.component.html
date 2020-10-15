@@ -1,17 +1,38 @@
-<h3 mat-dialog-title>Login</h3>
-<mat-dialog-content>
-  <mat-form-field>
-    <input [(ngModel)]="mobile" matInput placeholder="Mobile" type="text"/>
-    <button (click)="mobile=undefined" *ngIf="mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+<div class="modal-header">
+  <h4 class="modal-title">
+    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+    <span style="margin-left: 15px;">Login</span>
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+
+  <div class="form-group">
+    <label>Mobile</label>
+    <input [(ngModel)]="mobile" class="form-control" placeholder="Mobile" type="text"/>
+    <!-- <button (click)="mobile=undefined" *ngIf="mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <mat-form-field>
-    <input [(ngModel)]="password" matInput placeholder="Password" type="password"/>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button (click)="login()" mat-button mat-dialog-close>Submit</button>
-</mat-dialog-actions>
+    </button> -->
+  </div>
+
+  <div class="form-group">
+    <label>Contraseña</label>
+    <input [(ngModel)]="password" class="form-control" placeholder="Password" type="password"/>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">
+    <i class="fa fa-times" aria-hidden="true"></i>
+    <span>  Cancel</span>
+  </button>
+  <button (click)="login()" class="btn btn-primary">
+    <i class="fa fa-sign-in" aria-hidden="true"></i>
+    <span>  Acceder</span>
+  </button>
+</div>
